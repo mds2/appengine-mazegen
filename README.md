@@ -8,8 +8,16 @@ How to deploy
 
 TODO : add this.
 
+For the time being, consider adapting the instructions at
+https://cloud.google.com/appengine/docs/python/gettingstartedpython27/introduction
+
 Files
 ----------
 
-TODO : add this.
+ * `app.yaml` AppEngine configuration file
+ * `frontpage.py` Request handler for landing page
+ * `servemaze.py` Request handler for generating and serving mazes
+ * `MazeGen.py` Maze generator.  Taken from https://github.com/mds2/mazegen
+
+
 

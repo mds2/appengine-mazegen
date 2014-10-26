@@ -39,10 +39,14 @@ class MainPage(webapp2.RequestHandler):
                              '" target="_blank">'
                              'http://www.ccs.neu.edu/home/shivers/mazes.html'
                              '</a></i>)</p>')
-        self.response.write ('<p>Code available at '
+        self.response.write ('<p>Basic code for maze generation available at '
                              '<a href="https://github.com/mds2/mazegen" '
                              'target="_blank">https://github.com/mds2/mazegen'
                              '</a>')
+        self.response.write ('<p>Code to make this appengine page available at '
+                             '<a href="https://github.com/mds2/appengine-mazegen'
+                             '" target="_blank">'
+                             'https://github.com/mds2/appengine-mazegen</a>')
         if not user:
             self.response.write ('<br/><br/><p>* <small>'
                                  'I could, theoretically, record'
