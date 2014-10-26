@@ -3,31 +3,61 @@ import webapp2
 from google.appengine.api import users
 
 class MainPage(webapp2.RequestHandler):
-
-    def putFeedControlUI(self):
-        self.response.write("<div> </div>")
-        return
-
-    def getStreamURLs(user):
-        return ["http://mikeschuresko.blogspot.com/feeds/posts/default"]
-
     def get(self):
         user = users.get_current_user()
 
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write ('<html> <head>')
+        self.response.write ('<link rel="icon" href="statics/favicon.ico">')
+        self.response.write ('</head><body>')
         if user:
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write('Hello, ' + user.nickname())
+            self.response.write ('<h2>Hello, ' + user.nickname() + '</h2>')
+            self.response.write ('<p>From here, you can download ...')
+            self.response.write ('<ul>')
+            self.response.write ('<li><a href="large_maze.ps">a large maze</a>'
+                                 '</li>')
+            self.response.write ('<li><a href="huge_maze.ps">an even larger maze'
+                                 '</a>'
+                                 '</li>')
         else:
-            self.redirect(users.create_login_url(self.request.uri))
-        if user.user_id () !=
-            users.User("michael.schuresko@gmail.com").user_id():
-            self.response.write('<br/><br/>'
-                                'Currently this app only works for its author')
-            return
-        self.putFeedControlUI ()
-        url_list = self.getStreamURLs(user)
-        
-        for url in url_list:
+            self.response.write ('<h2>Hello</h2>')
+            self.response.write ('<p><small>You can <a href="' +
+                                 users.create_login_url(self.request.uri) +
+                                 '">login</a>* to access larger mazes' +
+                                 '</small></p>'
+                )
+            self.response.write ('<p>Or you can download ...<ul>')
+        self.response.write ('<li><a href="medium_maze.ps">a medium maze</a>'
+                             '</li>')
+        self.response.write ('<li><a href="small_maze.ps">a small maze</a>'
+                             '</li>')
+        self.response.write ('</ul><br/>')
+        self.response.write ('<p>(inspired by ')
+        self.response.write ('<i><a '
+                             'href="'
+                             'http://www.ccs.neu.edu/home/shivers/mazes.html'
+                             '" target="_blank">'
+                             'http://www.ccs.neu.edu/home/shivers/mazes.html'
+                             '</a></i>)</p>')
+        self.response.write ('<p>Code available at '
+                             '<a href="https://github.com/mds2/mazegen" '
+                             'target="_blank">https://github.com/mds2/mazegen'
+                             '</a>')
+        if not user:
+            self.response.write ('<br/><br/><p>* <small>'
+                                 'I could, theoretically, record'
+                                 ' which users had logged in to access large '
+                                 'mazes.'
+                                 ' So far I have been too lazy to write the '
+                                 'code to do so</small></p>')
+        self.response.write ('<hr/>')
+        self.response.write ('<i><a href="http://mikeschuresko.blogspot.com/"'
+                             ' target="_blank">'
+                             'http://mikeschuresko.blogspot.com/'
+                             '</a></i>')
+        self.response.write ('</body></html>')
+
+
             
 
 app = webapp2.WSGIApplication([('/', MainPage)],
